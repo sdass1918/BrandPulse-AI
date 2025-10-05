@@ -1,0 +1,143 @@
+{
+    "projectId": "68dfb9df003bba1d6711",
+    "endpoint": "https://fra.cloud.appwrite.io/v1",
+    "projectName": "BrandPulseAI",
+    "settings": {
+        "services": {
+            "account": true,
+            "avatars": true,
+            "databases": true,
+            "locale": true,
+            "health": true,
+            "storage": true,
+            "teams": true,
+            "users": true,
+            "sites": true,
+            "functions": true,
+            "graphql": true,
+            "messaging": true
+        },
+        "auth": {
+            "methods": {
+                "jwt": true,
+                "phone": true,
+                "invites": true,
+                "anonymous": true,
+                "email-otp": true,
+                "magic-url": true,
+                "email-password": true
+            },
+            "security": {
+                "duration": 31536000,
+                "limit": 0,
+                "sessionsLimit": 10,
+                "passwordHistory": 0,
+                "passwordDictionary": false,
+                "personalDataCheck": false,
+                "sessionAlerts": false,
+                "mockNumbers": []
+            }
+        }
+    },
+    "tablesDB": [
+        {
+            "$id": "68dfbc1a001abd9452a1",
+            "name": "BrandPulseData",
+            "enabled": true
+        }
+    ],
+    "tables": [
+        {
+            "$id": "feedback",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "68dfbc1a001abd9452a1",
+            "name": "Feedback",
+            "enabled": true,
+            "rowSecurity": false,
+            "columns": [
+                {
+                    "key": "content",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 10000,
+                    "default": null,
+                    "encrypt": false
+                },
+                {
+                    "key": "source",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null,
+                    "encrypt": false
+                },
+                {
+                    "key": "sentiment",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "elements": [
+                        "Positive",
+                        "Negative",
+                        "Neutral"
+                    ],
+                    "format": "enum",
+                    "default": null
+                },
+                {
+                    "key": "topic",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null,
+                    "encrypt": false
+                },
+                {
+                    "key": "link",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "format": "url",
+                    "default": null
+                },
+                {
+                    "key": "userQuery",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null,
+                    "encrypt": false
+                }
+            ],
+            "indexes": []
+        }
+    ],
+    "functions": [
+        {
+            "$id": "68dfd00a0037c42f55fb",
+            "name": "analyzeBrandPulse",
+            "runtime": "node-18.0",
+            "specification": "s-0.5vcpu-512mb",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "scopes": [
+                "users.read"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "path": "functions/analyzeBrandPulse"
+        }
+    ]
+}

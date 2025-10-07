@@ -5,13 +5,34 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Single feedback item component
+// function FeedbackItem({ item }) {
+//     const sentimentClass = item.sentiment.toLowerCase();
+//     return (
+//         <div className={`feedback-item ${sentimentClass}`}>
+//             <div className="item-header">
+//                 <span className={`sentiment-badge ${sentimentClass}`}>{item.sentiment}</span>
+//                 <strong className="topic-badge">{item.topic}</strong>
+//             </div>
+//             <p className="item-content">{item.content}</p>
+//             <a href={item.link} target="_blank" rel="noopener noreferrer">View on Reddit</a>
+//         </div>
+//     );
+// }
+
+// This whole function goes inside src/components/Results.jsx
+
 function FeedbackItem({ item }) {
-    const sentimentClass = item.sentiment.toLowerCase();
+    // If item.sentiment exists, make it lowercase. If not, default to 'neutral'.
+    const sentimentClass = item.sentiment?.toLowerCase() || 'neutral';
+    
+    // Provide a fallback for the sentiment text as well
+    const sentimentText = item.sentiment || 'Unknown';
+
     return (
         <div className={`feedback-item ${sentimentClass}`}>
             <div className="item-header">
-                <span className={`sentiment-badge ${sentimentClass}`}>{item.sentiment}</span>
-                <strong className="topic-badge">{item.topic}</strong>
+                <span className={`sentiment-badge ${sentimentClass}`}>{sentimentText}</span>
+                <strong className="topic-badge">{item.topic || 'General'}</strong>
             </div>
             <p className="item-content">{item.content}</p>
             <a href={item.link} target="_blank" rel="noopener noreferrer">View on Reddit</a>
